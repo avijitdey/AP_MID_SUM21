@@ -22,7 +22,11 @@ app.config([
 			})
 			.when("/productedit/:id", {
 				templateUrl: "views/pages/editproduct.html",
-				controller: "ProductContoller",
+				controller: "EditProduct",
+			})
+			.when("/productdelete/:id", {
+				templateUrl: "views/pages/products.html",
+				controller: "DeleteProduct",
 			})
 			.when("/categories", {
 				templateUrl: "views/pages/categories.html",
@@ -31,6 +35,22 @@ app.config([
 			.when("/addcategory", {
 				templateUrl: "views/pages/addcategory.html",
 				controller: "CategoryController",
+			})
+			.when("/categoryedit/:id", {
+				templateUrl: "views/pages/editcategory.html",
+				controller: "EditCategory",
+			})
+			.when("/orders", {
+				templateUrl: "views/pages/orders.html",
+				controller: "GetAllOrder",
+			})
+			.when("/addorder", {
+				templateUrl: "views/pages/addorder.html",
+				controller: "AddOrders",
+			})
+			.when("/orderdetail/:id", {
+				templateUrl: "views/pages/orderdetails.html",
+				controller: "GetOrderDetails",
 			})
 			.otherwise({
 				redirectTo: "/",

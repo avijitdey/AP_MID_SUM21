@@ -43,25 +43,69 @@ app.controller("ProductContoller",function($scope,$http,ajax,$location,$routePar
   
       }
       );
-
-
-
-     // Edit Product
-     $scope.updateproduct = function (){
-
-      ajax.post(API_ROOT+"api/Product/Add",$scope.pdt,
-        
-      function (response){
-        $location.path("/products");
-      },
-      function (error){
-
-      });
-
-     }
-
-
-     // Delete Product
-
   
 });
+
+
+
+app.controller("EditProduct",function($scope,$http,ajax,$location,$routeParams){
+
+    
+  var id= $routeParams.id;
+  ajax.get(API_ROOT+"api/Product/"+id+"/Details",
+    
+  function (response){
+    $scope.product=response.data;
+  },
+  function (error){
+
+  }
+  );
+  
+  ajax.get(API_ROOT+"api/Category/GetAll",
+  
+  function (response){
+    $scope.categories=response.data;
+  },
+  function (error){
+
+  }
+  );
+
+
+   // Edit Product
+   $scope.updateproduct = function (){
+
+    ajax.post(API_ROOT+"api/Product/Edit",$scope.product,
+      
+    function (response){
+      $location.path("/products");
+    },
+    function (error){
+
+    });
+
+   }
+
+
+});
+
+app.controller("DeleteProduct", function ($scope, $http, ajax, $routeParams) {
+
+
+     // Delete Product api/Product/{id}/Delete
+
+     var id= $routeParams.id;
+     ajax.get(API_ROOT+"api/Product/"+id+"/Delete",
+       
+     function (response){
+       $scope.product=response.data;
+     },
+     function (error){
+ 
+     }
+     );
+
+});
+
+
