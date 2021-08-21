@@ -8,21 +8,29 @@ namespace DAL
 {
    public class CategoryRepo
     {
-        static IMSEntities context;
+        static IMSOrderEntities context;
         static CategoryRepo()
         {
 
-            context = new IMSEntities();
+            context = new IMSOrderEntities();
         }
 
         public static List<Category> GetCategories()
         {
-            return context.Categories.ToList();
+             var g= context.Categories.ToList();
+            return g;
         }
 
         public static void AddCategory(Category c)
         {
             context.Categories.Add(c);
+            context.SaveChanges();
+        }
+
+        public static void EditCategory(Category c)
+        {
+            var old_c = context.Categories.FirstOrDefault(x => x.Id == c.Id);
+            context.Entry(old_c).CurrentValues.SetValues(c);
             context.SaveChanges();
         }
 
